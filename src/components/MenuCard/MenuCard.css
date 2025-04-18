@@ -9,7 +9,7 @@
 .menu-card {
     max-width: 580px;
     width: calc(50% - 20px);
-    border: 1px solid #35B8BE26;
+    border: 1px solid rgba(53, 184, 190, 0.15);
     border-radius: 8px;
     background-color: #FFFFFF;
     text-align: left;
@@ -32,7 +32,7 @@
     min-width: 378px;
 }
 
-.menu-content .menu-name-price  {
+.menu-content .menu-name-price {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -43,7 +43,7 @@
 .menu-name-price h3 {
     font-weight: 400;
     font-size: 18px;
-    line-height: 20px;
+    line-height: 1.11;
     letter-spacing: 0.6px;
     color: #08090A;
 }
@@ -51,15 +51,15 @@
 .menu-name-price p {
     font-weight: 400;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 1.25;
     color: #35B8BE;
 }
 
-.menu-description  {
+.menu-description {
     margin: 6px 0px;
     font-weight: 400;
     font-size: 16px;
-    line-height: 24px;
+    line-height: 1.5;
     letter-spacing: 0.32px;
     color: #546285;
     max-width: 351px;
@@ -73,7 +73,7 @@
 }
 
 .menu-add-container .card-input {
-    border: 1px solid #35B8BE26;
+    border: 1px solid rgba(53, 184, 190, 0.15);
     border-radius: 6px;
     width: 60px;
     height: 45px;
@@ -94,14 +94,14 @@
     border-radius: 6px;
     padding: 9px 27px;
     background-color: #35B8BE;
-    color: white;
+    color: #FFFFFF;
 }
 
 @media (max-width: 1120px) {
     .menu-card-list {
         flex-direction: column;
         align-items: center;
-        flex-wrap: none;
+        flex-wrap: nowrap;
     }
 
     .menu-card {

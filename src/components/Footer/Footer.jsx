@@ -23,10 +23,10 @@ class Footer extends Component {
               <div className="footer-section">
                 <h3>Company</h3>
                 <ul>
-                  <li><a href="#home">Home</a></li>
-                  <li><a href="#order">Order</a></li>
-                  <li><a href="#faq">FAQ</a></li>
-                  <li><a href="#contact">Contact</a></li>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">Order</a></li>
+                  <li><a href="#">FAQ</a></li>
+                  <li><a href="#">Contact</a></li>
                 </ul>
               </div>
               <div className="footer-section">
@@ -41,7 +41,7 @@ class Footer extends Component {
               <div className="footer-section">
                 <h3>Flowbase</h3>
                 <ul>
-                  <li><a href="#home">More Cloneables</a></li>
+                  <li><a href="#">More Cloneables</a></li>
                 </ul>
               </div>
             </div>

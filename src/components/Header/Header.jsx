@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css';
-import logoImage from './../../assets/icons/logo.svg';
-import cartImage from './../../assets/icons/shopping-cart.svg';
+import logoImage from '../../assets/icons/logo.svg';
+import cartImage from '../../assets/icons/shopping-cart.svg';
 
 class Header extends Component {
   render() {
@@ -16,10 +16,10 @@ class Header extends Component {
           <div className="navigation">
             <nav>
               <ul className="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a className="active" href="#menu">Menu</a></li>
-                <li><a href="#company">Company</a></li>
-                <li><a href="#login">Login</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a className="active" href="#">Menu</a></li>
+                <li><a href="#">Company</a></li>
+                <li><a href="#">Login</a></li>
               </ul>
             </nav>
             <div className="cart">
