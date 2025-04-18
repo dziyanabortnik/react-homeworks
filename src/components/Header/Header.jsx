@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Header.css';
 import logoImage from './../../assets/icons/logo.svg';
 import cartImage from './../../assets/icons/shopping-cart.svg';
 
-function Header() {
+class Header extends Component {
+    render() {
+    const { cartCount } = this.props;
     return (
         <header>
             <div className="container wrapper">
@@ -21,11 +23,13 @@ function Header() {
                 </nav>
                 <div className="cart">
                     <img src={cartImage} alt="Cart" className="cart-icon" />
+                    <span className="cart-count">{cartCount}</span>
                 </div>
              </div>
            </div>
         </header>
     );
+  }
 }
 
 export default Header;

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Footer.css';
 import logoImage from './../../assets/icons/logo.svg';
 import instagramImage from './../../assets/icons/instagram.svg';
 import twitterImage from './../../assets/icons/twitter.svg';
 import youtubeImage from './../../assets/icons/youtube.svg';
 
-function Footer() {
+class Footer extends Component {
+    render() {
     return (
         <footer>
             <div className="container">
@@ -31,10 +32,10 @@ function Footer() {
                     <div className="footer-section">
                         <h3>Template</h3>
                         <ul>
-                            <li><a href="#home">Style Guide</a></li>
-                            <li><a href="#order">Changelog</a></li>
-                            <li><a href="#faq">Licence</a></li>
-                            <li><a href="#contact">Webflow University</a></li>
+                            <li><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Style Guide</a></li>
+                            <li><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Changelog</a></li>
+                            <li><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Licence</a></li>
+                            <li><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Webflow University</a></li>
                         </ul>
                     </div>
                     <div className="footer-section">
@@ -65,6 +66,7 @@ function Footer() {
             </div>
         </footer>
     );
+    }
 }
 
 export default Footer;

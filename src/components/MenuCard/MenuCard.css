@@ -1,7 +1,7 @@
 .menu-card-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 20px;
     max-width: 1200px;
 }
@@ -20,8 +20,20 @@
     gap: 30px;
     padding: 26px;
 }
+
+.menu-image {
+    max-width: 120px;
+    max-height: 120px;
+    width: auto;
+    height: auto;
+}
+
+.menu-content {
+    min-width: 378px;
+}
  
 .menu-content .menu-name-price {
+    max-width: 378px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -45,6 +57,7 @@
 }
 
 .menu-description {
+    max-width: 378px;
     margin: 6px 0px;
     font-weight: 400;
     font-size: 16px;

@@ -1,60 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import MenuCard from './../../components/MenuCard/MenuCard';
 import Tooltip from './../../components/ToolTip/ToolTip';
 import './MenuPage.css';
-import burgerDreams from './../../assets/images/menu/burger-dreams.png';
-import burgerWaldo from './../../assets/images/menu/burger-waldo.png';
-import burgerCali from './../../assets/images/menu/burger-cali.png';
-import burgerBaconBuddy from './../../assets/images/menu/burger-bacon-buddy.png';
-import burgerSpicy from './../../assets/images/menu/burger-spicy.png';
-import burgerClassic from './../../assets/images/menu/burger-classic.png'
 
-const items = [
-    { 
-        id: 1, 
-        image: burgerDreams,
-        name: 'Burger Dreams', 
-        price: "$9.20 USD", 
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-        id: 2,
-        image: burgerWaldo,
-        name: 'Burger Waldo', 
-        price: "$10.00 USD", 
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-        id: 3, 
-        image: burgerCali, 
-        name: 'Burger Cali',
-        price: "$8.00 USD",
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' 
-    },  
-    {
-        id: 4,
-        image: burgerBaconBuddy,
-        name: 'Burger Bacon Buddy', 
-        price: "$9.99 USD", 
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-        id: 5,
-        image: burgerSpicy,
-        name: 'Burger Spicy',
-        price: "$9.20 USD",
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-        id: 6,
-        image: burgerClassic,
-        name: 'Burger Classic',
-        price: "$8.00 USD",
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+class MenuPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          menuItems: [],
+          orders: [],
+          currentPage: 0,
+          itemsPerPage: 6,
+        };
     }
-];
 
-function MenuPage() {
+    componentDidMount() {
+        fetch('https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals') //meal
+          .then(response => response.json())
+          .then(data => {
+            const filteredItems = data.filter(item => item.category === 'Dessert');
+            this.setState({ menuItems: filteredItems });
+        })
+          .catch(error => console.error('Error fetching menu:', error));
+
+          fetch('https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/orders') //orders
+          .then(response => response.json())
+          .then(data => {
+              this.setState({ orders: data });
+          })
+          .catch(error => console.error('Error fetching orders:', error));
+    }
+
+    handleSeeMore = () => {
+        this.setState(prevState => ({
+            currentPage: prevState.currentPage + 1,
+        }));
+    };
+
+    render() {
+        const { menuItems, currentPage, itemsPerPage } = this.state;
+        const displayedItems = menuItems.slice(0, (currentPage + 1) * itemsPerPage);
+
+        const showSeeMoreButton = displayedItems.length < menuItems.length;
+
     return (
         <main>
             <div className="container wrapper">
@@ -64,15 +53,19 @@ function MenuPage() {
                 </section>
                 <section className='categories'>
                     <button className='category-button active'>Desert</button>
-                    <button className='category-button'>Dinner</button>
-                    <button className='category-button'>Breakfast</button>
+                    <button className='category-button' disabled>Dinner</button>
+                    <button className='category-button' disabled>Breakfast</button>
                 </section>
-                
-                <MenuCard items={items} />
-                <button className='see-more-button'>See more</button>
+
+                <MenuCard items={displayedItems} onAddToCart={this.props.onAddToCart} />
+
+                {showSeeMoreButton && (
+                <button className='see-more-button' onClick={this.handleSeeMore} >See more</button>
+                )}
             </div>
         </main>
     );
+    }
 }
 
 export default MenuPage;
