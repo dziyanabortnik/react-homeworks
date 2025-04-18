@@ -29,18 +29,18 @@ header .wrapper {
   align-items: center;
   gap: 77px;
 }
-  
+
 .nav-links {
   display: flex;
   list-style: none;
 }
-  
+
 .nav-links a {
   text-decoration: none;
   color: #28224B;
-  padding: 16px 20px
+  padding: 16px 20px;
 }
-  
+
 .nav-links a:hover {
   color: #35B8BE;
 }
@@ -48,10 +48,36 @@ header .wrapper {
 .nav-links .active {
   color: #35B8BE;
 }
-  
+
+.cart {
+  position: relative;
+  width: 61px;
+  height: 61px;
+}
+
 .cart-icon {
   width: 61px;
   height: 61px;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 0;
+}
+
+.cart-count {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  color: #35B8BE;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 7px 7px 25px 0px rgba(126, 130, 143, 0.27);
 }
 
 @media (max-width: 720px) {
