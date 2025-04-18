@@ -38,7 +38,7 @@ header .wrapper {
 .nav-links a {
   text-decoration: none;
   color: #28224B;
-  padding: 16px 20px
+  padding: 16px 20px;
 }
   
 .nav-links a:hover {
@@ -54,7 +54,7 @@ header .wrapper {
   width: 61px;
   height: 61px;
 }
-  
+
 .cart-icon {
   width: 61px;
   height: 61px;

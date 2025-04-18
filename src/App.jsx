@@ -13,7 +13,7 @@ class App extends Component {
 
   handleAddToCart = (item, quantity) => {
     const { cartItems } = this.state;
-    const existingItemIndex = cartItems.findIndex(cartItem => cartItem.id === item.id);
+    const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
 
     if (existingItemIndex !== -1) {
       const updatedCart = [...cartItems];
@@ -29,13 +29,13 @@ class App extends Component {
   };
 
   render() {
-  return (
-    <div>
-      <Header cartCount={this.getCartCount()} />
-      <MenuPage onAddToCart={this.handleAddToCart} />
-      <Footer />
-    </div>
-  );
+    return (
+      <div>
+        <Header cartCount={this.getCartCount()} />
+        <MenuPage onAddToCart={this.handleAddToCart} />
+        <Footer />
+      </div>
+    );
   }
 }
 
