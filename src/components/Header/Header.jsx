@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Header.css';
 import logoImage from '../../assets/icons/logo.svg';
 import cartImage from '../../assets/icons/shopping-cart.svg';
 
-class Header extends Component {
-  render() {
-    const { cartCount } = this.props;
-
+const Header = ({ cartCount }) => {
     return (
       <header>
         <div className="container wrapper">
@@ -30,7 +27,6 @@ class Header extends Component {
         </div>
       </header>
     );
-  }
 }
 
 export default Header;

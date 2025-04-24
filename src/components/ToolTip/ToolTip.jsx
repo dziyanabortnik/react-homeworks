@@ -1,31 +1,17 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './Tooltip.css';
 
-class Tooltip extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isVisible: false,
-    };
-  }
+const Tooltip = ({ text, tooltipText }) => {
+  const [isVisible, setIsVisible] = useState(false);
 
-  showTooltip = () => {
-    this.setState({ isVisible: true });
-  };
-
-  hideTooltip = () => {
-    this.setState({ isVisible: false });
-  };
-
-  render() {
-    const { text, tooltipText } = this.props;
-    const { isVisible } = this.state;
+  const showTooltip = () => setIsVisible(true);
+  const hideTooltip = () => setIsVisible(false);
 
     return (
       <span
         className="tooltip-wrapper"
-        onMouseEnter={this.showTooltip}
-        onMouseLeave={this.hideTooltip}
+        onMouseEnter={showTooltip}
+        onMouseLeave={hideTooltip}
       >
         <span className="tooltip-target">{text}</span>
         {isVisible && (
@@ -37,7 +23,6 @@ class Tooltip extends Component {
         )}
       </span>
     );
-  }
 }
 
 export default Tooltip;
