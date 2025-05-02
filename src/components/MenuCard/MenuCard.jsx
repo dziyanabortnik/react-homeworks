@@ -1,15 +1,9 @@
-import React, { Component } from 'react';
+import React, { useRef } from 'react';
 import './MenuCard.css';
 
-class MenuCard extends Component {
-  constructor(props) {
-    super(props);
-    this.inputRefs = {};
-  }
-
-  render() {
-    const { items } = this.props;
-
+const MenuCard = ({ items, onAddToCart }) => {
+  const inputRefs = useRef({});
+  
     return (
         <div className="menu-card-list">
           {items.map((item) => (
@@ -32,13 +26,16 @@ class MenuCard extends Component {
                         min="1"
                         className="card-input"
                         ref={(ref) => {
-                          if (ref) this.inputRefs[item.id] = ref;
+                          if (ref) inputRefs.current[item.id] = ref;
                         }}
                     />
                     <button
                         className="menu-add-button"
                         onClick={() =>
-                            this.props.onAddToCart(item, parseInt(this.inputRefs[item.id]?.value || "1", 10))
+                          onAddToCart(
+                            item,
+                            parseInt(inputRefs.current[item.id]?.value || "1", 10)
+                          )
                         }
                     >
                       Add to cart
@@ -49,7 +46,6 @@ class MenuCard extends Component {
           ))}
         </div>
     );
-  }
 }
 
 export default MenuCard;

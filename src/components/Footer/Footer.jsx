@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Footer.css';
 import logoImage from './../../assets/icons/logo.svg';
 import instagramImage from './../../assets/icons/instagram.svg';
 import twitterImage from './../../assets/icons/twitter.svg';
 import youtubeImage from './../../assets/icons/youtube.svg';
 
-class Footer extends Component {
-  render() {
+const Footer = () =>  {
     return (
       <footer>
         <div className="container">
@@ -68,7 +67,6 @@ class Footer extends Component {
         </div>
       </footer>
     );
-  }
 }
 
 export default Footer;

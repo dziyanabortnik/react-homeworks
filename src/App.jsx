@@ -1,42 +1,34 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MenuPage from './pages/MenuPage/MenuPage';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cartItems: [],
-    };
-  }
+const App = () => {
+  const [cartItems, setCartItems] = useState([]);
 
-  handleAddToCart = (item, quantity) => {
-    const { cartItems } = this.state;
+  const handleAddToCart = (item, quantity) => {
     const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
 
     if (existingItemIndex !== -1) {
       const updatedCart = [...cartItems];
       updatedCart[existingItemIndex].quantity += quantity;
-      this.setState({ cartItems: updatedCart });
+      setCartItems(updatedCart);
     } else {
-      this.setState({ cartItems: [...cartItems, { ...item, quantity }] });
+      setCartItems([...cartItems, { ...item, quantity }]);
     }
   };
 
-  getCartCount = () => {
-    return this.state.cartItems.reduce((total, item) => total + item.quantity, 0);
+  const getCartCount = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
 
-  render() {
     return (
       <div>
-        <Header cartCount={this.getCartCount()} />
-        <MenuPage onAddToCart={this.handleAddToCart} />
+        <Header cartCount={getCartCount()} />
+        <MenuPage onAddToCart={handleAddToCart} />
         <Footer />
       </div>
     );
-  }
 }
 
 export default App;
