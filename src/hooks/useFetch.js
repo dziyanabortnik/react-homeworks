@@ -13,6 +13,8 @@ const useFetch = () => {
       const response = await fetch(url, options);
       logEntry.status = response.status;
 
+      console.log("API Call Log:", logEntry);
+
       try {
         const existingLogs = JSON.parse(localStorage.getItem('apiLogs')) || [];
         existingLogs.push(logEntry);
@@ -25,6 +27,9 @@ const useFetch = () => {
       return await response.json();
     } catch (error) {
       logEntry.error = error.message;
+
+      console.error("API Error Log:", logEntry);
+      
       try {
         const existingLogs = JSON.parse(localStorage.getItem('apiLogs')) || [];
         existingLogs.push(logEntry);
