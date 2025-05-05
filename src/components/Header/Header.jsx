@@ -3,7 +3,7 @@ import './Header.css';
 import logoImage from '../../assets/icons/logo.svg';
 import cartImage from '../../assets/icons/shopping-cart.svg';
 
-const Header = ({ cartCount }) => {
+const Header = ({ cartCount, onPageChange, currentPage }) => {
     return (
       <header>
         <div className="container wrapper">
@@ -13,8 +13,12 @@ const Header = ({ cartCount }) => {
           <div className="navigation">
             <nav>
               <ul className="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a className="active" href="#">Menu</a></li>
+                <li>
+                  <a href="#" className={currentPage === 'home' ? 'active' : ''} onClick={() => onPageChange('home')}>Home</a>
+                  </li>
+                <li>
+                  <a href="#" className={currentPage === 'menu' ? 'active' : ''} onClick={() => onPageChange('menu')}>Menu</a>
+                  </li>
                 <li><a href="#">Company</a></li>
                 <li><a href="#">Login</a></li>
               </ul>
