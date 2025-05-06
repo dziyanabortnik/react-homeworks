@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import MenuCard from './../../components/MenuCard/MenuCard';
-import Tooltip from './../../components/ToolTip/ToolTip';
+import MenuCard from '../../components/MenuCard/MenuCard';
+import Tooltip from '../../components/ToolTip/ToolTip';
+import useFetch from '../../hooks/useFetch';
 import './MenuPage.css';
 
 const MenuPage = ({ onAddToCart }) => {
@@ -10,27 +11,36 @@ const MenuPage = ({ onAddToCart }) => {
     // const [orders, setOrders] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 6;
+    const [loading, setLoading] = useState(false);
+
+    const fetchData = useFetch();
 
     useEffect(() => {
-        fetch('https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals')// meal
-          .then(response => response.json())
-          .then(data => {
-            const filteredItems = data.filter(item => item.category === selectedCategory);
-            setMenuItems(filteredItems);
-          })
-          .catch(error => console.error('Error fetching menu:', error));
+        setCurrentPage(0);
+        setLoading(true);
+
+        const loadMenu = async () => {
+            try {
+                const data = await fetchData(
+                    'https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals'
+                );
+                setMenuItems(
+                    data.filter(item => item.category === selectedCategory)
+                );
+            } catch (error) {
+                console.error('Error fetching menu:', error);
+                setMenuItems([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadMenu();
     
-        // fetch('https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/orders')//orders
-        //   .then(response => response.json())
-        //   .then(data => {
-        //     setOrders(data);
-        //   })
-        //   .catch(error => console.error('Error fetching orders:', error));
-      }, [selectedCategory]);
+    }, [selectedCategory, fetchData]);
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
-        setCurrentPage(0);
     }
 
     const handleSeeMore = () => {
@@ -49,7 +59,7 @@ const MenuPage = ({ onAddToCart }) => {
                     </section>
                     <section className='categories'>
                         <button className={`category-button ${selectedCategory === 'Dessert' ? 'active' : ''}`} onClick={() => handleCategoryChange('Dessert')}>
-                            Desert
+                            Dessert
                         </button>
                         <button className={`category-button ${selectedCategory === 'Dinner' ? 'active' : ''}`} onClick={() => handleCategoryChange('Dinner')}>
                             Dinner
@@ -59,10 +69,17 @@ const MenuPage = ({ onAddToCart }) => {
                         </button>
                     </section>
 
+                    {loading ? (
+                        <p>Loading…</p>
+                    ) : (
+                    <>
+
                     <MenuCard items={displayedItems} onAddToCart={onAddToCart} />
 
                     {showSeeMoreButton && (
                         <button className='see-more-button' onClick={handleSeeMore}>See more</button>
+                    )}
+                    </>
                     )}
                 </div>
             </main>
