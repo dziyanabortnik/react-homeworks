@@ -15,12 +15,14 @@ const Header = ({ cartCount, onPageChange, currentPage }) => {
               <ul className="nav-links">
                 <li>
                   <a href="#" className={currentPage === 'home' ? 'active' : ''} onClick={() => onPageChange('home')}>Home</a>
-                  </li>
+                </li>
                 <li>
                   <a href="#" className={currentPage === 'menu' ? 'active' : ''} onClick={() => onPageChange('menu')}>Menu</a>
-                  </li>
+                </li>
                 <li><a href="#">Company</a></li>
-                <li><a href="#">Login</a></li>
+                <li>
+                  <a href="#" className={currentPage === 'login' ? 'active' : ''} onClick={() => onPageChange('login')}>Login</a>
+                </li>
               </ul>
             </nav>
             <div className="cart">
