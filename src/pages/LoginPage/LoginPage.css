@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('./Inter-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('./Inter-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+main {
+    background-image: url('./../../assets/images/background-login.svg');
+}
+
+main .container {
+    padding: 140px 120px;
+}
+
+main .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 55px;
+    letter-spacing: 1.65px;
+    color: #35B8BE;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 37px;
+    border: 1px solid rgba(53, 184, 190, 0.15);
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    padding: 36px 68px 42px;
+    margin-top: 37px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    width: 100%;
+}
+
+.input-container p {
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0.6px;
+    color: #08090A;
+}
+
+.input {
+    padding: 10px 15px;
+    border: 1px solid #DDDDDD;
+    border-radius: 6px;
+    width: 430px;
+    height: 45px;
+    color: #000000;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: 0.36px;
+    background-color: #FAFAFA;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.button {
+    border-radius: 6px; 
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    cursor: pointer;
+    min-height: 52px;
+}
+
+.submit {
+    color: #FFFFFF;
+    border: none;
+    background-color: #35B8BE;
+    padding: 16px 46px;
+}
+
+.cancel {
+    color: #222222;
+    border: 1px solid rgba(97, 114, 131, 0.2);
+    background-color: transparent;
+    padding: 16px 40px 16px 35px;
+}
+
+.message {
+    font-size: 16px;
+}
+
+.already-logged-in {
+    max-width: 430px;
+    text-align: center;
+}
