@@ -1,8 +1,22 @@
 import React, { useRef } from 'react';
 import './MenuCard.css';
 
-const MenuCard = ({ items, onAddToCart }) => {
-  const inputRefs = useRef({});
+export interface IMenuItem {
+  id: string;
+  category: string;
+  img?: string;
+  meal?: string;
+  price?: number;
+  instructions?: string;
+}
+
+interface IMenuCardProps {
+  items: IMenuItem[];
+  onAddToCart: (item: IMenuItem, quantity: number) => void;
+}
+
+const MenuCard: React.FC<IMenuCardProps> = ({ items, onAddToCart }) => {
+  const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
   
     return (
         <div className="menu-card-list">
@@ -28,6 +42,7 @@ const MenuCard = ({ items, onAddToCart }) => {
                         ref={(ref) => {
                           if (ref) inputRefs.current[item.id] = ref;
                         }}
+                        title="Quantity"
                     />
                     <button
                         className="menu-add-button"

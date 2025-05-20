@@ -3,7 +3,14 @@ import './Header.css';
 import logoImage from '../../assets/icons/logo.svg';
 import cartImage from '../../assets/icons/shopping-cart.svg';
 
-const Header = ({ cartCount, onPageChange, currentPage }) => {
+interface IHeaderProps {
+  cartCount: number;
+  onPageChange: (page: string) => void;
+  currentPage: string;
+  isLoggedIn: boolean;
+}
+
+const Header: React.FC<IHeaderProps> = ({ cartCount, onPageChange, currentPage }) => {
     return (
       <header>
         <div className="container wrapper">

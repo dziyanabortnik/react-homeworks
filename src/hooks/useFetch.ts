@@ -1,8 +1,19 @@
 import { useCallback } from 'react';
 
+interface IFetchOptions extends RequestInit {}
+
+interface ILogEntry {
+  url: string;
+  method: string;
+  body: any;
+  timestamp: string;
+  status?: number;
+  error?: string;
+}
+
 const useFetch = () => {
-  const customFetch = useCallback(async (url, options = {}) => {
-    const logEntry = {
+  const customFetch = useCallback(async (url: string, options: IFetchOptions = {}): Promise<any> => {
+    const logEntry: ILogEntry = {
       url,
       method: options.method || 'GET',
       body: options.body || null,
@@ -16,7 +27,7 @@ const useFetch = () => {
       console.log("API Call Log:", logEntry);
 
       try {
-        const existingLogs = JSON.parse(localStorage.getItem('apiLogs')) || [];
+        const existingLogs: ILogEntry[] = JSON.parse(localStorage.getItem('apiLogs') || '[]');
         existingLogs.push(logEntry);
         localStorage.setItem('apiLogs', JSON.stringify(existingLogs));
       } catch {
@@ -25,13 +36,13 @@ const useFetch = () => {
       }
 
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       logEntry.error = error.message;
 
       console.error("API Error Log:", logEntry);
       
       try {
-        const existingLogs = JSON.parse(localStorage.getItem('apiLogs')) || [];
+        const existingLogs: ILogEntry[] = JSON.parse(localStorage.getItem('apiLogs') || '[]');
         existingLogs.push(logEntry);
         localStorage.setItem('apiLogs', JSON.stringify(existingLogs));
       } catch {
