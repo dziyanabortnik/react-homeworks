@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, User } from 'firebase/auth';
 import { auth } from '../../firebase';
 import './LoginPage.css';
 
-const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+interface LoginPageProps {
+  onLogin: (user: User) => void;
+}
 
-    const handleSubmit = async (e) => {
+const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [message, setMessage] = useState<string>('');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
         setMessage('');
@@ -24,13 +28,15 @@ const LoginPage = () => {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             setMessage('Успешный вход!');
             console.log('Вошёл пользователь:', userCredential.user);
-        } catch (error) {
+            onLogin(userCredential.user);
+        } catch (error: any) {
             if (error.code === 'auth/invalid-credential') {
                 try {
                     const newUser = await createUserWithEmailAndPassword(auth, email, password);
                     setMessage('Пользователь успешно зарегистрирован!');
                     console.log('Зарегистрирован пользователь:', newUser.user);
-                } catch (createError) {
+                    onLogin(newUser.user);
+                } catch (createError: any) {
                     if (createError.code === 'auth/email-already-in-use') {
                         setMessage('Неправильный пароль.');
                     } else {
@@ -78,7 +84,7 @@ const LoginPage = () => {
                             onChange={(e) => setPassword(e.target.value)} 
                             className="input"
                             required
-                            minLength="4"
+                            minLength={4}
                         />
                     </div>
 

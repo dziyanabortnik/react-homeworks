@@ -4,14 +4,27 @@ import Tooltip from '../../components/ToolTip/ToolTip';
 import useFetch from '../../hooks/useFetch';
 import './MenuPage.css';
 
-const MenuPage = ({ onAddToCart }) => {
+interface IMenuItem {
+    id: string;
+    category: string;
+    img?: string;
+    meal?: string;
+    price?: number;
+    instructions?: string;
+}
 
-    const [menuItems, setMenuItems] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('Dessert');
+interface IMenuPageProps {
+    onAddToCart: (item: IMenuItem, quantity: number) => void;
+}
+
+const MenuPage: React.FC<IMenuPageProps> = ({ onAddToCart }) => {
+
+    const [menuItems, setMenuItems] = useState<IMenuItem[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string>('Dessert');
     // const [orders, setOrders] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState<number>(0);
     const itemsPerPage = 6;
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const fetchData = useFetch();
 
@@ -21,7 +34,7 @@ const MenuPage = ({ onAddToCart }) => {
 
         const loadMenu = async () => {
             try {
-                const data = await fetchData(
+                const data: IMenuItem[] = await fetchData(
                     'https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals'
                 );
                 setMenuItems(
@@ -39,7 +52,7 @@ const MenuPage = ({ onAddToCart }) => {
     
     }, [selectedCategory, fetchData]);
 
-    const handleCategoryChange = (category) => {
+    const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
     }
 

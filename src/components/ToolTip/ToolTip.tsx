@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import './Tooltip.css';
 
-const Tooltip = ({ text, tooltipText }) => {
+interface ITooltipProps {
+  text: string;
+  tooltipText: string;
+}
+
+const Tooltip: React.FC<ITooltipProps> = ({ text, tooltipText }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const showTooltip = () => setIsVisible(true);

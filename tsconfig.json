@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2016",    
+    "module": "esnext",   
+    "esModuleInterop": true,   
+    "forceConsistentCasingInFileNames": true, 
+    "strict": true, 
+    "skipLibCheck": true,                    
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "types": ["vite/client"]
+  },
+  "include": ["src", "**/*.ts", "**/*.tsx", "declarations.d.ts"],
+  "exclude": ["node_modules"]
+}
