@@ -2,15 +2,20 @@ import React from 'react';
 import './Header.css';
 import logoImage from '../../assets/icons/logo.svg';
 import cartImage from '../../assets/icons/shopping-cart.svg';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
 
 interface IHeaderProps {
-  cartCount: number;
   onPageChange: (page: string) => void;
   currentPage: string;
   isLoggedIn: boolean;
 }
 
-const Header: React.FC<IHeaderProps> = ({ cartCount, onPageChange, currentPage }) => {
+const Header: React.FC<IHeaderProps> = ({ onPageChange,   currentPage }) => {
+  const cartCount = useSelector((state: RootState) =>
+    state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
+  );
+
     return (
       <header>
         <div className="container wrapper">

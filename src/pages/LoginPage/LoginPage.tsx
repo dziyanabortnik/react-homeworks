@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, User } from 'firebase/auth';
 import { auth } from '../../firebase';
 import './LoginPage.css';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../features/slice/userSlice';
+import { setCurrentPage } from '../../features/slice/navigationSlice';
 
-interface LoginPageProps {
-  onLogin: (user: User) => void;
-}
-
-const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
+const LoginPage: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [message, setMessage] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,16 +27,15 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            dispatch(setUser({ uid: userCredential.user.uid, email: userCredential.user.email }));
+            dispatch(setCurrentPage('home'));
             setMessage('Успешный вход!');
-            console.log('Вошёл пользователь:', userCredential.user);
-            onLogin(userCredential.user);
         } catch (error: any) {
             if (error.code === 'auth/invalid-credential') {
                 try {
                     const newUser = await createUserWithEmailAndPassword(auth, email, password);
+                    dispatch(setUser({ uid: newUser.user.uid, email: newUser.user.email }));
                     setMessage('Пользователь успешно зарегистрирован!');
-                    console.log('Зарегистрирован пользователь:', newUser.user);
-                    onLogin(newUser.user);
                 } catch (createError: any) {
                     if (createError.code === 'auth/email-already-in-use') {
                         setMessage('Неправильный пароль.');

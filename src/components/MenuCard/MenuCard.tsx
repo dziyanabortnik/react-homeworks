@@ -1,22 +1,23 @@
 import React, { useRef } from 'react';
 import './MenuCard.css';
-
-export interface IMenuItem {
-  id: string;
-  category: string;
-  img?: string;
-  meal?: string;
-  price?: number;
-  instructions?: string;
-}
+import { useDispatch } from 'react-redux';
+import type { IMenuItem } from '../../features/slice/menuSlice';
+import { addToCart } from '../../features/slice/cartSlice';
 
 interface IMenuCardProps {
   items: IMenuItem[];
-  onAddToCart: (item: IMenuItem, quantity: number) => void;
 }
 
-const MenuCard: React.FC<IMenuCardProps> = ({ items, onAddToCart }) => {
+const MenuCard: React.FC<IMenuCardProps> = ({ items }) => {
+  const dispatch = useDispatch();
   const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+
+  const handleAddToCart = (item: IMenuItem) => {
+    const quantity = parseInt(inputRefs.current[item.id]?.value || '1', 10);
+    if (quantity > 0) {
+      dispatch(addToCart({ item, quantity }));
+    }
+  };
   
     return (
         <div className="menu-card-list">
@@ -45,13 +46,8 @@ const MenuCard: React.FC<IMenuCardProps> = ({ items, onAddToCart }) => {
                         title="Quantity"
                     />
                     <button
-                        className="menu-add-button"
-                        onClick={() =>
-                          onAddToCart(
-                            item,
-                            parseInt(inputRefs.current[item.id]?.value || "1", 10)
-                          )
-                        }
+                      className="menu-add-button"
+                      onClick={() => handleAddToCart(item)}
                     >
                       Add to cart
                     </button>
