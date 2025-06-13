@@ -5,7 +5,7 @@ import instagramImage from './../../assets/icons/instagram.svg';
 import twitterImage from './../../assets/icons/twitter.svg';
 import youtubeImage from './../../assets/icons/youtube.svg';
 
-const Footer = () =>  {
+const Footer: React.FC = () =>  {
     return (
       <footer>
         <div className="container">

@@ -1,67 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import MenuCard from '../../components/MenuCard/MenuCard';
 import Tooltip from '../../components/ToolTip/ToolTip';
-import useFetch from '../../hooks/useFetch';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../app/store';
+import { fetchMenuItems, setCategory, incrementPage, IMenuItem } from '../../features/slice/menuSlice';
 import './MenuPage.css';
 
-interface IMenuItem {
-    id: string;
-    category: string;
-    img?: string;
-    meal?: string;
-    price?: number;
-    instructions?: string;
-}
+const MenuPage: React.FC = () => {
 
-interface IMenuPageProps {
-    onAddToCart: (item: IMenuItem, quantity: number) => void;
-}
-
-const MenuPage: React.FC<IMenuPageProps> = ({ onAddToCart }) => {
-
-    const [menuItems, setMenuItems] = useState<IMenuItem[]>([]);
-    const [selectedCategory, setSelectedCategory] = useState<string>('Dessert');
-    // const [orders, setOrders] = useState([]);
-    const [currentPage, setCurrentPage] = useState<number>(0);
+    const dispatch = useDispatch<AppDispatch>();
+    const { items, selectedCategory, loading, currentPage } = useSelector((state: RootState) => state.menu);
     const itemsPerPage = 6;
-    const [loading, setLoading] = useState<boolean>(false);
-
-    const fetchData = useFetch();
 
     useEffect(() => {
-        setCurrentPage(0);
-        setLoading(true);
-
-        const loadMenu = async () => {
-            try {
-                const data: IMenuItem[] = await fetchData(
-                    'https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals'
-                );
-                setMenuItems(
-                    data.filter(item => item.category === selectedCategory)
-                );
-            } catch (error) {
-                console.error('Error fetching menu:', error);
-                setMenuItems([]);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        loadMenu();
-    
-    }, [selectedCategory, fetchData]);
+        dispatch(fetchMenuItems(selectedCategory));
+    }, [selectedCategory, dispatch]);
 
     const handleCategoryChange = (category: string) => {
-        setSelectedCategory(category);
+        dispatch(setCategory(category));
     }
 
     const handleSeeMore = () => {
-        setCurrentPage(prevPage => prevPage + 1);
+        dispatch(incrementPage());
     };
 
-    const displayedItems = menuItems.slice(0, (currentPage + 1) * itemsPerPage);
-    const showSeeMoreButton = displayedItems.length < menuItems.length;
+    const displayedItems = items.slice(0, (currentPage + 1) * itemsPerPage);
+    const showSeeMoreButton = displayedItems.length < items.length;
 
         return (
             <main>
@@ -71,27 +35,23 @@ const MenuPage: React.FC<IMenuPageProps> = ({ onAddToCart }) => {
                         <p>Use our menu to place an order online, or <Tooltip text="phone" tooltipText="Call us: +370-670-3756"/> our store to place a pickup order. Fast and fresh food.</p>
                     </section>
                     <section className='categories'>
-                        <button className={`category-button ${selectedCategory === 'Dessert' ? 'active' : ''}`} onClick={() => handleCategoryChange('Dessert')}>
-                            Dessert
+                        {['Dessert', 'Dinner', 'Breakfast'].map((category) => (
+                        <button
+                           key={category}
+                           className={`category-button ${selectedCategory === category ? 'active' : ''}`}
+                           onClick={() => handleCategoryChange(category)}
+                        >
+                            {category}
                         </button>
-                        <button className={`category-button ${selectedCategory === 'Dinner' ? 'active' : ''}`} onClick={() => handleCategoryChange('Dinner')}>
-                            Dinner
-                        </button>
-                        <button className={`category-button ${selectedCategory === 'Breakfast' ? 'active' : ''}`} onClick={() => handleCategoryChange('Breakfast')}>
-                            Breakfast
-                        </button>
+                        ))}
                     </section>
 
                     {loading ? (
                         <p>Loading…</p>
                     ) : (
                     <>
-
-                    <MenuCard items={displayedItems} onAddToCart={onAddToCart} />
-
-                    {showSeeMoreButton && (
-                        <button className='see-more-button' onClick={handleSeeMore}>See more</button>
-                    )}
+                        <MenuCard items={displayedItems} />
+                        {showSeeMoreButton && <button className='see-more-button' onClick={handleSeeMore}>See more</button>}
                     </>
                     )}
                 </div>
