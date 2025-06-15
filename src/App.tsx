@@ -1,38 +1,27 @@
 import React, { useEffect } from 'react';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import Layout from './components/Layout/Layout';
 import MenuPage from './pages/MenuPage/MenuPage';
 import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import OrderPage from './pages/OrderPage/OrderPage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import RequireAuth from './components/Auth/RequireAuth';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './app/store';
-import { setUser, clearUser } from './features/slice/userSlice';
-import { setCurrentPage } from './features/slice/navigationSlice';
+import { useDispatch } from 'react-redux';
+import { setUser, clearUser, setLoading } from './features/slice/userSlice';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const currentPage = useSelector((state: RootState) => state.navigation);
-  const user = useSelector((state: RootState) => state.user);
-
-  const handlePageChange = (page: string): void => {
-    if (!user && page !== 'login') {
-      alert('Please log in first');
-      dispatch(setCurrentPage('login'));
-    } else {
-      dispatch(setCurrentPage(page));
-    }
-  };
 
   useEffect(() => {
+    dispatch(setLoading(true));
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
-        dispatch(setUser(firebaseUser));
-        dispatch(setCurrentPage('home'));
+        dispatch(setUser({ uid: firebaseUser.uid, email: firebaseUser.email }));
       } else {
         dispatch(clearUser());
-        dispatch(setCurrentPage('login'));
       }
     });
 
@@ -40,19 +29,19 @@ const App: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <Header
-        onPageChange={handlePageChange}
-        currentPage={currentPage}
-        isLoggedIn={!!user}
-      />
-
-      {currentPage === 'login' && <LoginPage />}
-      {currentPage === 'home' && user && <HomePage />}
-      {currentPage === 'menu' && user && <MenuPage />}
-
-      <Footer />
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />} path="/" >
+            <Route element={<HomePage />} index />
+            <Route element={<MenuPage />} path="menu" />
+            <Route element={<LoginPage />} path="login" />
+            <Route element={<RequireAuth><OrderPage /></RequireAuth>} path="order" />
+            <Route element={<NotFoundPage />} path="*" />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 

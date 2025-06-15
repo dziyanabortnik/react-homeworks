@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, User } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence } from 'firebase/auth';
 import { auth } from '../../firebase';
 import './LoginPage.css';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../features/slice/userSlice';
-import { setCurrentPage } from '../../features/slice/navigationSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState<string>('');
@@ -13,6 +14,22 @@ const LoginPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
+    useEffect(() => {
+        setEmail('');
+        setPassword('');
+        setMessage('');
+    }, [dispatch]);
+    
+    useEffect(() => {
+        if (location.state?.message) {
+          setMessage(location.state.message);
+        }
+    }, [location.state]);
+
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,16 +43,19 @@ const LoginPage: React.FC = () => {
         }
 
         try {
+            await setPersistence(auth, browserSessionPersistence);
+
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             dispatch(setUser({ uid: userCredential.user.uid, email: userCredential.user.email }));
-            dispatch(setCurrentPage('home'));
-            setMessage('Успешный вход!');
+            navigate(from, { replace: true });
         } catch (error: any) {
             if (error.code === 'auth/invalid-credential') {
                 try {
+                    await setPersistence(auth, browserSessionPersistence);
+
                     const newUser = await createUserWithEmailAndPassword(auth, email, password);
                     dispatch(setUser({ uid: newUser.user.uid, email: newUser.user.email }));
-                    setMessage('Пользователь успешно зарегистрирован!');
+                    navigate(from, { replace: true });
                 } catch (createError: any) {
                     if (createError.code === 'auth/email-already-in-use') {
                         setMessage('Неправильный пароль.');
