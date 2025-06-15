@@ -37,6 +37,8 @@ const userSlice = createSlice({
     logout(state) {
       state.user = null;
       state.isLoading = false;
+      localStorage.removeItem('cart');
+      
       signOut(auth).catch((err) => {
         console.error('Ошибка при выходе из Firebase:', err);
       });

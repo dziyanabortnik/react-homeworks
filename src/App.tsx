@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import { useDispatch } from 'react-redux';
+import { clearCart } from './features/slice/cartSlice';
 import { setUser, clearUser, setLoading } from './features/slice/userSlice';
 
 const App: React.FC = () => {
@@ -22,6 +23,8 @@ const App: React.FC = () => {
         dispatch(setUser({ uid: firebaseUser.uid, email: firebaseUser.email }));
       } else {
         dispatch(clearUser());
+        dispatch(clearCart());
+        localStorage.removeItem('cart');
       }
     });
 
