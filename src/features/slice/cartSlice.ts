@@ -10,7 +10,9 @@ interface CartState {
   items: CartItem[];
 }
 
-const initialState: CartState = {
+const savedCart = localStorage.getItem('cart');
+
+const initialState: CartState = savedCart ? JSON.parse(savedCart) : {
   items: [],
 };
 
@@ -33,8 +35,16 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.items = [];
     },
+
+    updateCartQuantity(state, action) {
+      const { id, quantity } = action.payload;
+      const item = state.items.find(i => i.item.id === id);
+      if (item && quantity > 0) {
+        item.quantity = quantity;
+      }
+    },
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, updateCartQuantity } = cartSlice.actions;
 export default cartSlice.reducer;

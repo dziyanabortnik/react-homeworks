@@ -53,6 +53,7 @@ header .wrapper {
   position: relative;
   width: 61px;
   height: 61px;
+  cursor: pointer;
 }
 
 .cart-icon {
