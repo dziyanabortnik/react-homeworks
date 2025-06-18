@@ -12,6 +12,7 @@ import { auth } from './firebase';
 import { useDispatch } from 'react-redux';
 import { clearCart } from './features/slice/cartSlice';
 import { setUser, clearUser, setLoading } from './features/slice/userSlice';
+import { ThemeProvider } from './theme/ThemeContext';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const App: React.FC = () => {
 
   return (
     <>
+    <ThemeProvider>
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />} path="/" >
@@ -44,6 +46,7 @@ const App: React.FC = () => {
           </Route>
         </Routes>
       </BrowserRouter>
+      </ThemeProvider>
     </>
   );
 };

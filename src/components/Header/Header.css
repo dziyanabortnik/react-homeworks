@@ -5,7 +5,7 @@
 }
 
 header {
-  color: #28224B;
+  color: var(--text-color);
 }
 
 header .container {
@@ -27,7 +27,7 @@ header .wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 77px;
+  gap: 120px;
 }
 
 .nav-links {
@@ -37,7 +37,7 @@ header .wrapper {
 
 .nav-links a {
   text-decoration: none;
-  color: #28224B;
+  color: var(--text-color);
   padding: 16px 20px;
 }
 
@@ -70,7 +70,7 @@ header .wrapper {
   z-index: 1;
   top: 0;
   right: 0;
-  background-color: #FFFFFF;
+  background-color: var(--add-button-color);
   color: #35B8BE;
   width: 25px;
   height: 25px;
@@ -79,6 +79,26 @@ header .wrapper {
   justify-content: center;
   align-items: center;
   box-shadow: 7px 7px 25px 0px rgba(126, 130, 143, 0.27);
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 60px;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  padding: 8px 24px;
+  background-color: var(--theme-button-color);
+  color: var(--bg-color);
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 @media (max-width: 720px) {

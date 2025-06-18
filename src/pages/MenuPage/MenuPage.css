@@ -20,7 +20,7 @@
 }
 
 main {
-    background-image: url('./../../assets/images/background-main.svg');
+    background-image: var(--background-image-menu);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -59,7 +59,7 @@ main .wrapper {
     line-height: 27px;
     letter-spacing: 0.36px;
     text-align: center;
-    color: #546285;
+    color: var(--text-color);
     max-width: 466px;
 }
 
@@ -78,31 +78,32 @@ main .wrapper {
     padding: 16px 46px;
     border: none;
     border-radius: 6px;
-    color: #222222;
+    color: var(--text-color);
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
-    border: 1px solid #61728333;
+    border: 1px solid;
+    border-color: var(--some-color);
     background-color: transparent;
     cursor: pointer;
 }
 
 .category-button:hover {
     background-color: #35B8BE;
-    color: white;
+    color: var(--button-color);
     border: none;
 }
 
 .categories .active {
     background-color: #35B8BE;
-    color: white;
+    color: var(--button-color);
     border: none;
 }
 
 .see-more-button {
     padding: 16px 46px;
     background-color: #35B8BE;
-    color: white;
+    color: var(--button-color);
     font-weight: 400;
     font-size: 17px;
     line-height: 20px;

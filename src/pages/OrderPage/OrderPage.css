@@ -20,7 +20,7 @@
 }
 
 main {
-    background-image: url('./../../assets/images/background-main.svg');
+    background-image: var(--background-image-order);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -61,7 +61,7 @@ h1 {
     align-items: center;
     justify-content: space-between;
     padding: 40px 26px;
-    background-color: #FFFFFF;
+    background-color: var(--bg-color);
     border: 1px solid rgba(53, 184, 190, 0.15);
     border-radius: 6px;
 }
@@ -85,7 +85,7 @@ h1 {
     font-size: 18px;
     line-height: 20px;
     letter-spacing: 0.6px;
-    color: #08090A;
+    color: var(--text-color);
 }
 
 .order-details .order-price {
@@ -107,19 +107,19 @@ h1 {
     border-radius: 6px;
     width: 60px;
     height: 45px;
-    color: #000000;
+    color: #08090a;
     font-weight: normal;
     font-size: 16px;
     line-height: 27px;
     letter-spacing: 0.36px;
     text-align: center;
-    background-color: #FAFAFA;
+    background-color: var(--add-button-color);
 }
 
 .remove-btn {
     border: none;
     background-color: #35B8BE;
-    color: #FFFFFF;
+    color: var(--button-color);
     cursor: pointer;
     border-radius: 6px;
     width: 60px;
@@ -145,7 +145,7 @@ h1 {
     font-size: 18px;
     line-height: 20px;
     letter-spacing: 0.6px;
-    color: #08090A;
+    color: var(--text-color);
     min-width: 100px;
 }
 
@@ -155,13 +155,13 @@ input {
     border-radius: 6px;
     width: 430px;
     height: 45px;
-    background-color: #FAFAFA;
+    background-color: var(--add-button-color);
 }
 
 .order-button {
     padding: 16px;
     background-color: #35B8BE;
-    color: #FFFFFF;
+    color: var(--button-color);
     font-weight: normal;
     font-size: 17px;
     line-height: 20px;

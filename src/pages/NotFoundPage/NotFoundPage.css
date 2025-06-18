@@ -36,14 +36,14 @@
     font-size: 18px;
     line-height: 20px;
     letter-spacing: 0.6px;
-    color: #08090A;
+    color: var(--text-color);
     margin-bottom: 30px;
 }
 
 .main-wrapper button {
     padding: 16px 40px;
     background-color: #35B8BE;
-    color: #FFFFFF;
+    color: var(--button-color);
     font-weight: normal;
     font-size: 17px;
     line-height: 20px;
