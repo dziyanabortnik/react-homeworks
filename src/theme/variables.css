@@ -1,0 +1,47 @@
+:root {
+  --background-image-menu: url('./../assets/images/backgroung-menu.svg');
+  --background-image-home: url('./../assets/images/home/background-homepage.svg');
+  --background-image-login: url('./../assets/images/background-login.svg');
+  --background-image-order: url('./../assets/images/background-order.svg');
+
+  --background-image-footer: url('./../assets/images/background-footer.svg');
+
+  --bg-color: #ffffff;
+  --some-color: #1d1d1d33;
+  --button-color: #ffffff;
+  --text-color: #08090A;
+  --primary-color: #35B8BE;
+  --primary-hover: #6BD5DE;
+
+  --description-color: #546285;
+  --add-button-color: #ffffff;
+
+  --theme-button-color: #717171;
+}
+
+[data-theme='dark'] {
+  --background-image-menu: url('./../assets/images/dark-theme/background-menu.svg');
+  --background-image-home: url('./../assets/images/dark-theme/background-home.svg');
+  --background-image-login: url('./../assets/images/dark-theme/background-login.svg');
+  --background-image-order: url('./../assets/images/dark-theme/background-order.svg');
+
+  --background-image-footer: url('./../assets/images/dark-theme/footer.svg');
+
+  --bg-color: #353535;
+  --some-color: #e3e3e3;
+  --button-color: #ffffffc7;
+  --text-color: #eaeaea;
+  --primary-color: #6BD5DE;
+  --primary-hover: #35B8BE;
+
+  --description-color: #bdcfcf;
+  --add-button-color: #d2d2d2;
+
+  --theme-button-color: #ffffff;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}

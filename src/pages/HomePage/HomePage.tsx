@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import homeImage from '../../assets/images/home/homepage-main.png';
-import Trustpilot from '../../assets/images/home/homepage-trustpilot.svg';
+import TrustpilotLight from '../../assets/images/home/homepage-trustpilot.svg';
+import TrustpilotDark from '../../assets/images/home/homepage-darktheme-trustpilot.png';
+import { useContext } from "react";
+import { ThemeContext } from "../../theme/ThemeContext"
 
 const Main = styled.main`
-    background-image: url("../../assets/images/home/background-homepage.svg");
+    background-image: var(--background-image-home);
     padding: 140px 120px;
 `;
 
@@ -28,7 +31,7 @@ const Heading = styled.h1`
     font-size: 60px;
     line-height: 60px;
     letter-spacing: 1.8px;
-    color: #08090a;
+    color: var(--text-color);
 
     span {
         color: #35b8be;
@@ -40,7 +43,7 @@ const Paragraph = styled.p`
     font-size: 18px;
     line-height: 24.1px;
     letter-spacing: 0.36px;
-      color: #546285;
+      color: var(--description-color);
 `;
 
 const OrderButton = styled.button`
@@ -53,7 +56,6 @@ const OrderButton = styled.button`
     border: none;
     border-radius: 6px;
     margin: 27px 0 3px;
-    opacity: 0.6;
 `;
 
 const TrustPilot = styled.div`
@@ -66,7 +68,7 @@ const TrustPilot = styled.div`
         font-weight: normal;
         font-size: 16px;
         line-height: 20px;
-        color: #08090a;
+        color: var(--text-color);
 
         span {
             color: #35b8be;
@@ -79,6 +81,9 @@ const Image = styled.img`
 `;
 
 const HomePage = () => {
+    const { theme } = useContext(ThemeContext);
+    const Trustpilot = theme === 'dark' ? TrustpilotDark : TrustpilotLight;
+
     return (
         <Main>
             <Wrapper>

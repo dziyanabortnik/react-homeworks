@@ -5,6 +5,8 @@ import cartImage from '../../assets/icons/shopping-cart.svg';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import { useContext } from 'react';
+import { ThemeContext } from '../../theme/ThemeContext';
 
 interface IHeaderProps {
   isLoggedIn: boolean;
@@ -15,6 +17,7 @@ const Header: React.FC<IHeaderProps> = ({ isLoggedIn }) => {
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
   );
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
       <header>
@@ -33,10 +36,15 @@ const Header: React.FC<IHeaderProps> = ({ isLoggedIn }) => {
                 <li><Link to="/login">Login</Link></li>
               </ul>
             </nav>
-            <div 
-              onClick={() => navigate('/order')} className="cart">
-              <img src={cartImage} alt="Cart" className="cart-icon" />
-              <span className="cart-count">{cartCount}</span>
+            <div className="actions">
+              <button onClick={toggleTheme} className="theme-toggle">
+                {theme === 'light' ? 'Light' : 'Dark'}
+              </button>
+              <div 
+                onClick={() => navigate('/order')} className="cart">
+                <img src={cartImage} alt="Cart" className="cart-icon" />
+                <span className="cart-count">{cartCount}</span>
+              </div>
             </div>
           </div>
         </div>

@@ -4,8 +4,18 @@ import logoImage from './../../assets/icons/logo.svg';
 import instagramImage from './../../assets/icons/instagram.svg';
 import twitterImage from './../../assets/icons/twitter.svg';
 import youtubeImage from './../../assets/icons/youtube.svg';
+import instagramDark from './../../assets/icons/dark-theme/instagram.svg';
+import twitterDark from './../../assets/icons/dark-theme/twitter.svg';
+import youtubeDark from './../../assets/icons/dark-theme/youtube.svg';
+import { useContext } from 'react';
+import { ThemeContext } from '../../theme/ThemeContext';
 
 const Footer: React.FC = () =>  {
+  const { theme } = useContext(ThemeContext);
+
+  const instagramIcon = theme === 'dark' ? instagramDark : instagramImage;
+  const twitterIcon = theme === 'dark' ? twitterDark : twitterImage;
+  const youtubeIcon = theme === 'dark' ? youtubeDark : youtubeImage;
     return (
       <footer>
         <div className="container">
@@ -54,13 +64,13 @@ const Footer: React.FC = () =>  {
             </p>
             <div className='social'>
               <a href="#">
-                <img src={instagramImage} alt="Instagram" className="Instagram" />
+                <img src={instagramIcon} alt="Instagram" className="Instagram" />
               </a>
               <a href="#">
-                <img src={twitterImage} alt="Twitter" className="Twitter" />
+                <img src={twitterIcon} alt="Twitter" className="Twitter" />
               </a>
               <a href="#">
-                <img src={youtubeImage} alt="Youtube" className="Youtube" />
+                <img src={youtubeIcon} alt="Youtube" className="Youtube" />
               </a>
             </div>
           </div>

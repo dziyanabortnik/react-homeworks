@@ -20,7 +20,7 @@
 }
 
 main {
-    background-image: url('./../../assets/images/background-login.svg');
+    background-image: var(--background-image-login);
 }
 
 main .container {
@@ -48,7 +48,7 @@ h1 {
     gap: 37px;
     border: 1px solid rgba(53, 184, 190, 0.15);
     border-radius: 6px;
-    background-color: #FFFFFF;
+    background-color: var(--bg-color);
     padding: 36px 68px 42px;
     margin-top: 37px;
 }
@@ -66,21 +66,22 @@ h1 {
     font-size: 18px;
     line-height: 20px;
     letter-spacing: 0.6px;
-    color: #08090A;
+    color: var(--text-color);
 }
 
 .input {
     padding: 10px 15px;
-    border: 1px solid #DDDDDD;
+    border: 1px solid;
+    border-color: var(--some-color);
     border-radius: 6px;
     width: 430px;
     height: 45px;
-    color: #000000;
+    color: #08090a;
     font-weight: normal;
     font-size: 16px;
     line-height: 27px;
     letter-spacing: 0.36px;
-    background-color: #FAFAFA;
+    background-color: var(--add-button-color);
 }
 
 .button-container {
@@ -101,15 +102,16 @@ h1 {
 }
 
 .submit {
-    color: #FFFFFF;
+    color: var(--button-color);
     border: none;
     background-color: #35B8BE;
     padding: 16px 46px;
 }
 
 .cancel {
-    color: #222222;
-    border: 1px solid rgba(97, 114, 131, 0.2);
+    color: var(--text-color);
+    border: 1px solid;
+    border-color: var(--some-color);
     background-color: transparent;
     padding: 16px 40px 16px 35px;
 }

@@ -11,7 +11,7 @@
     width: calc(50% - 20px);
     border: 1px solid rgba(53, 184, 190, 0.15);
     border-radius: 8px;
-    background-color: #FFFFFF;
+    background-color: var(--bg-color);
     text-align: left;
     display: flex;
     flex-direction: row;
@@ -45,7 +45,7 @@
     font-size: 18px;
     line-height: 1.11;
     letter-spacing: 0.6px;
-    color: #08090A;
+    color: var(--text-color);
 }
 
 .menu-name-price p {
@@ -61,7 +61,7 @@
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: 0.32px;
-    color: #546285;
+    color: var(--description-color);
     max-width: 351px;
 }
 
@@ -77,12 +77,13 @@
     border-radius: 6px;
     width: 60px;
     height: 45px;
-    color: #000000;
+    color: #08090a;
     font-weight: 400;
     font-size: 16px;
     line-height: 27px;
     letter-spacing: 0.36px;
     text-align: center;
+    background-color: var(--add-button-color);
 }
 
 .menu-add-container .menu-add-button {
@@ -94,7 +95,7 @@
     border-radius: 6px;
     padding: 9px 27px;
     background-color: #35B8BE;
-    color: #FFFFFF;
+    color: var(--button-color);
 }
 
 @media (max-width: 1120px) {
