@@ -1,5 +1,6 @@
+// Uses Firebase Auth for sign in/up. Dispatches user info to Redux (userSlice)
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence, signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 import './LoginPage.css';
 import { useDispatch } from 'react-redux';
@@ -77,6 +78,18 @@ const LoginPage: React.FC = () => {
         setMessage('');
     };
 
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+            dispatch(setUser(null));
+            setMessage('Вы вышли из аккаунта.');
+            setEmail('');
+            setPassword('');
+        } catch (error: any) {
+            setMessage(`Ошибка выхода: ${error.message}`);
+        }
+    };
+
     return (
         <main>
             <section className="container wrapper">
@@ -114,6 +127,9 @@ const LoginPage: React.FC = () => {
                         </button>
                         <button className="button cancel" type="button" onClick={handleCancel}>
                             Cancel
+                        </button>
+                        <button className="button logout" type="button" onClick={handleLogout}>
+                            Logout
                         </button>
                     </div>
 

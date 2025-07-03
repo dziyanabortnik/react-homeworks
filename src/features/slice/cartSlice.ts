@@ -1,3 +1,4 @@
+// Manages cart items and quantities. Actions: addToCart, removeFromCart, updateQuantity, clearCart. Syncs state with localStorage.
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IMenuItem } from './menuSlice';
 

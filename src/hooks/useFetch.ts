@@ -1,3 +1,4 @@
+// Wraps fetch in useCallback. Logs each request to localStorage for debugging.
 import { useCallback } from 'react';
 
 interface IFetchOptions extends RequestInit {}

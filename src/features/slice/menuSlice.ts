@@ -1,3 +1,4 @@
+// Fetches food items via API (fetchMenuItems thunk). Supports category filtering and pagination. Handles loading/error states.
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export interface IMenuItem {

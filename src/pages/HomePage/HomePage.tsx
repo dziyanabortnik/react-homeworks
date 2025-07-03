@@ -24,6 +24,10 @@ const Hero = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 26px;
+
+    @media (max-width: 1000px) {
+        align-items: center;
+    }
 `;
 
 const Heading = styled.h1`
@@ -43,7 +47,11 @@ const Paragraph = styled.p`
     font-size: 18px;
     line-height: 24.1px;
     letter-spacing: 0.36px;
-      color: var(--description-color);
+    color: var(--description-color);
+
+    @media (max-width: 1000px) {
+        text-align: center;
+    }
 `;
 
 const OrderButton = styled.button`
@@ -78,6 +86,10 @@ const TrustPilot = styled.div`
 
 const Image = styled.img`
     max-width: 100%;
+
+    @media (max-width: 1000px) {
+        display: none;
+    }
 `;
 
 const HomePage = () => {

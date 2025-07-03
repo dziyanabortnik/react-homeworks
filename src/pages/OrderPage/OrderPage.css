@@ -50,12 +50,13 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 90%;
     gap: 16px;
     margin: 44px 0 16px;
 }
 
 .order-item {
-    min-width: 1180px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -132,6 +133,7 @@ h1 {
     align-items: center;
     gap: 22px;
     margin-bottom: 35px;
+    width: 50%
 }
 
 .order-address-inputs {
@@ -139,6 +141,8 @@ h1 {
     flex-direction: row;
     align-items: center;
     gap: 30px;
+    width: 100%;
+    min-width: 460px;
 }
 
 .order-address-inputs p {
@@ -169,4 +173,38 @@ input {
     border-radius: 6px;
     cursor: pointer;
     min-width: 132px;
+}
+
+@media (max-width: 1000px) {
+    .order-quantity {
+        gap: 16px;
+    }
+
+    .order-details {
+        margin: 0 20px 0 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .order-item {
+        flex-direction: column;
+        gap: 20px;
+        max-width: 250px;
+    }
+
+    .order-details {
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px 0 20px;
+    }
+
+    .order-img {
+        max-width: 170px;
+        max-height: 170px;
+    }
+
+    .order-details p {
+        text-align: center;
+    }
 }

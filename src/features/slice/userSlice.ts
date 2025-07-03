@@ -1,3 +1,4 @@
+// Stores uid, email, loading, error states. Uses Firebase for login/logout. Updates local auth state and clears on logout.
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';

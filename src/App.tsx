@@ -1,3 +1,4 @@
+// Defines routes with React Router. Wraps app in ThemeProvider and Redux Provider. Handles Firebase Auth state changes to update Redux.
 import React, { useEffect } from 'react';
 import Layout from './components/Layout/Layout';
 import MenuPage from './pages/MenuPage/MenuPage';

@@ -1,19 +1,37 @@
-import React from 'react';
+// Shows cart items, allows quantity editing and removal. Calculates total price, clears cart on submit.
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
-import { removeFromCart, updateCartQuantity  } from '../../features/slice/cartSlice';
+import { removeFromCart, updateCartQuantity, clearCart } from '../../features/slice/cartSlice';
 import './OrderPage.css';
 
 const OrderPage: React.FC = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
     const dispatch = useDispatch();
 
+    const [street, setStreet] = useState('');
+    const [house, setHouse] = useState('');
+
     const handleRemove = (id: string) => {
         dispatch(removeFromCart(id));
     };
 
     const handleOrder = () => {
-        alert('Order placed!');
+        if (!street.trim() || !house.trim()) {
+            alert('Please enter both street and house number.');
+            return;
+        }
+
+        const address = `${street}, house ${house}`;
+        const totalPrice = cartItems.reduce((sum, item) => {
+            return sum + (item.item.price || 0) * item.quantity;
+        }, 0);
+
+        alert(`Order placed!\n\nTotal: $${totalPrice.toFixed(2)} USD\nDelivery to: ${address}`);
+
+        dispatch(clearCart());
+        setStreet('');
+        setHouse('');
     };
 
     const totalPrice = cartItems.reduce((sum, item) => {
@@ -50,11 +68,11 @@ const OrderPage: React.FC = () => {
                     <div className="order-address">
                         <div className="order-address-inputs">
                             <p>Street</p>
-                            <input type="text" title="Street"/>
+                            <input type="text" value={street} onChange={(e) => setStreet(e.target.value)} title='Street name'/>
                         </div>
                         <div className="order-address-inputs">
                             <p>House</p>
-                            <input type="text" title=" House"/>
+                            <input type="text" value={house} onChange={(e) => setHouse(e.target.value)} title='House number'/>
                         </div>
                     </div>
                     <button onClick={handleOrder} className="order-button">Order</button>
