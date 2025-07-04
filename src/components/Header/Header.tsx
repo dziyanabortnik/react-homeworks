@@ -1,8 +1,9 @@
+// Gets cart item count from Redux (cartSlice). Calls toggleTheme() from ThemeContext.
 import React from 'react';
 import './Header.css';
 import logoImage from '../../assets/icons/logo.svg';
 import cartImage from '../../assets/icons/shopping-cart.svg';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { useContext } from 'react';
@@ -30,10 +31,10 @@ const Header: React.FC<IHeaderProps> = ({ isLoggedIn }) => {
           <div className="navigation">
             <nav>
               <ul className="nav-links">
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/menu">Menu</Link></li>
+                <li><NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink></li>
+                <li><NavLink to="/menu" className={({ isActive }) => isActive ? 'active' : ''}>Menu</NavLink></li>
                 <li><Link to="#">Company</Link></li>
-                <li><Link to="/login">Login</Link></li>
+                <li><NavLink to="/login" className={({ isActive }) => isActive ? 'active' : ''}>Login</NavLink></li>
               </ul>
             </nav>
             <div className="actions">

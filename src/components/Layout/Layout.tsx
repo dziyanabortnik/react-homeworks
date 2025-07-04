@@ -1,3 +1,4 @@
+// Renders Header, Footer, and <Outlet>. Passes isLoggedIn state to Header from Redux (userSlice).
 import React from 'react';
 import Header from './../Header/Header';
 import Footer from './../Footer/Footer';

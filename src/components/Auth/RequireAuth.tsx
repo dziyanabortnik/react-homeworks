@@ -1,3 +1,4 @@
+//Checks if user is authenticated (via Redux). Redirects to /login if not authenticated
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';

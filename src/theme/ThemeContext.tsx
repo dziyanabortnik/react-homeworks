@@ -1,3 +1,4 @@
+// Uses createContext + useState + useEffect. Stores theme in localStorage and sets data-theme attribute
 import React, { createContext, useEffect, useState } from 'react';
 
 type Theme = 'light' | 'dark';
